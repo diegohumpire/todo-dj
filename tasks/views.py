@@ -9,31 +9,6 @@ from rest_framework.reverse import reverse
 from rest_framework import viewsets
 
 
-# class TaskList(generics.ListCreateAPIView):
-#     queryset = Task.objects.all()
-#     serializer_class = TaskSerializer
-#     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-#
-#     def perform_create(self, serializer):
-#         serializer.save(user=self.request.user)
-#
-#
-# class TaskDetail(generics.RetrieveUpdateDestroyAPIView):
-#     queryset = Task.objects.all()
-#     serializer_class = TaskSerializer
-#     permission_classes = (permissions.IsAuthenticatedOrReadOnly,
-#                           IsOwnerOrReadOnly,)
-#
-#
-# class TaskHighLight(generics.GenericAPIView):
-#     queryset = Task.objects.all()
-#     renderer_classes = (renderers.StaticHTMLRenderer,)
-#
-#     def get(self, request, *args, **kwargs):
-#         task = self.get_object()
-#         return Response('{} - {}'.format(task.title, task.description))
-
-
 class TaskViewSet(viewsets.ModelViewSet):
     """
     This viewset automatically provides `list`, `create`, `retrieve`,
@@ -70,3 +45,5 @@ def api_root(request, format=None):
         'users': reverse('user-list', request=request, format=format),
         'tasks': reverse('task-list', request=request, format=format)
     })
+
+

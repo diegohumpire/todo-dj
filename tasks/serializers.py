@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 class TaskSerializer(serializers.HyperlinkedModelSerializer):
     user = serializers.ReadOnlyField(source='user.username')
-    highlight = serializers.HyperlinkedIdentityField(view_name='task-title', format='html')
+    highlight = serializers.HyperlinkedIdentityField(view_name='task-highlight', format='html')
 
     class Meta:
         model = Task
