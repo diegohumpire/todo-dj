@@ -3,16 +3,18 @@ from .models import Task
 from django.contrib.auth.models import User
 
 
-class TaskSerializer(serializers.ModelSerializer):
+class TaskSerializer(serializers.HyperlinkedModelSerializer):
+    user = serializers.ReadOnlyField(source='user.username')
+    highlight = serializers.HyperlinkedIdentityField(view_name='task-title', format='html')
+
     class Meta:
         model = Task
-        fields = ('id', 'title', 'description', 'state', 'publish_date', 'user')
+        fields = ('url', 'highlight', 'user', 'id', 'title', 'description', 'state', 'publish_date')
 
 
-class UserSerializer(serializers.ModelSerializer):
-    tasks = serializers.PrimaryKeyRelatedField(many=True, queryset=Task.objects.all())
-    user = serializers.ReadOnlyField(source='user.username')
+class UserSerializer(serializers.HyperlinkedModelSerializer):
+    tasks = serializers.HyperlinkedRelatedField(many=True, view_name='task-detail', read_only=True)
 
     class Meta:
         model = User
-        fields = ('id', 'username', 'tasks', 'user')
+        fields = ('id', 'username', 'tasks')
