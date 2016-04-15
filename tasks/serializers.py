@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import Task
 from django.contrib.auth.models import User
+from rest_framework.authtoken.models import Token
 
 
 class TaskSerializer(serializers.HyperlinkedModelSerializer):
@@ -18,3 +19,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
         fields = ('id', 'username', 'tasks')
+
+
+class TokenSerializer(serializers.Serializer):
+    pass

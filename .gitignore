@@ -1,2 +1,6 @@
 static/
 static
+*.pyc
+/*.pyc
+*.sqlite3
+db.sqlite3
