@@ -67,11 +67,10 @@ class TokenView(APIView):
                 # the password verified for the user
                 if user.is_active:
                     token, created = Token.objects.get_or_create(user=user)
+                    userSerializer =  UserSerializer(user, context={'request': request})
                     tokenSerializer = TokenSerializer(data={
                         'token': token.key,
-                        'user': {
-                            'username': user.username
-                        }
+                        'user': userSerializer.data
                     })
                     return Response(tokenSerializer.initial_data, status=status.HTTP_200_OK)
                 else:
