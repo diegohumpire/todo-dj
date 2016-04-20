@@ -10,6 +10,7 @@ router.register(r'users', views.UserViewSet)
 
 urlpatterns = [
     url(r'^', include(router.urls)),
-    url(r'^api-auth/tokenizer/', views.TokenView.as_view(), name="tokenizer"),
+    url(r'^users/tasks/(?P<token>[\w-]+)', views.UserTaskTokenView.as_view(), name='tasks_by_token'),
+    url(r'^api-auth/tokenizer/', views.TokenView.as_view(), name='tokenizer'),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]

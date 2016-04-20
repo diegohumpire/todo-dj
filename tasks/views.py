@@ -33,7 +33,7 @@ class TaskViewSet(viewsets.ModelViewSet):
         return Response('{} - {}'.format(task.title, task.description))
 
     def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
+        serializer.save(user=self.request.user)
 
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
@@ -42,6 +42,24 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
     """
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+
+class UserTaskTokenView(APIView):
+    permission_classes = (permissions.IsAuthenticated,)
+                          
+    def error_response_default(self, message, error=True):
+        return { 'error': error, 'message': message }
+        
+    def get(self, request, token, format=None):
+        try:
+            user = User.objects.get(auth_token__key=token)
+            userTasks = UserSerializer(user, context={'request':request})
+            return Response(userTasks.data, status=status.HTTP_200_OK)
+        except Exception as e:
+            responseError = self.error_response_default(unicode(e))
+            errorSerializer = ErrorSerializer(data=responseError)
+            return Response(errorSerializer.initial_data, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
 
 
 @permission_classes((permissions.AllowAny,))

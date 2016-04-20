@@ -12,13 +12,13 @@ class TaskSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('url', 'highlight', 'user', 'id', 'title', 'description', 'state', 'publish_date')
 
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
-    tasks = serializers.HyperlinkedRelatedField(many=True, view_name='task-detail', read_only=True)
-
+class UserSerializer(serializers.ModelSerializer):
+    tasks = TaskSerializer(many=True)
     class Meta:
         model = User
         fields = ('id', 'username', 'tasks')
-
+        depth = 1
+        
 
 class ErrorSerializer(serializers.Serializer):
     error = serializers.BooleanField(default=True)
