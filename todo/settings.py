@@ -81,17 +81,17 @@ WSGI_APPLICATION = 'todo.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
+# mysql://b23b9bc7e95506:450a8cc8@us-cdbr-iron-east-03.cleardb.net/heroku_461ba33cac87fba?reconnect=true
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'HOST': '127.0.0.1',
-#         'NAME': 'todo-dj',
-#         'USER': 'root',
-#         'PASSWORD': '',
-#     }
-# }
-DATABASES['default'] = dj_database_url.config(default='mysql://b23b9bc7e95506:450a8cc8@us-cdbr-iron-east-03.cleardb.net/heroku_461ba33cac87fba?reconnect=true')
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'HOST': 'us-cdbr-iron-east-03.cleardb.net',
+        'NAME': 'heroku_461ba33cac87fba',
+        'USER': 'b23b9bc7e95506',
+        'PASSWORD': '450a8cc8',
+    }
+}
 
 
 # Password validation
