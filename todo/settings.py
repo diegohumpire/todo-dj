@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
+import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -81,15 +82,16 @@ WSGI_APPLICATION = 'todo.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'HOST': '127.0.0.1',
-        'NAME': 'todo-dj',
-        'USER': 'root',
-        'PASSWORD': '',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'HOST': '127.0.0.1',
+#         'NAME': 'todo-dj',
+#         'USER': 'root',
+#         'PASSWORD': '',
+#     }
+# }
+DATABASES['default'] = dj_database_url.config(default='mysql://b23b9bc7e95506:450a8cc8@us-cdbr-iron-east-03.cleardb.net/heroku_461ba33cac87fba?reconnect=true')
 
 
 # Password validation
