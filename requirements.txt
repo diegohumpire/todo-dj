@@ -12,3 +12,4 @@ pep257==0.7.0
 pep8==1.7.0
 static3==0.6.1
 virtualenv==15.0.0
+whitenoise==3.0
