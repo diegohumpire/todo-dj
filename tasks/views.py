@@ -1,9 +1,8 @@
 from django.contrib.auth.models import User
 from django.http import Http404
 from django.contrib.auth import authenticate
-from .permissions import IsOwnerOrReadOnly
-from .models import Task
-from .serializers import TaskSerializer, UserSerializer, TokenSerializer, ErrorSerializer
+from django.shortcuts import render
+from django.views.generic import View
 from rest_framework import generics, permissions, renderers
 from rest_framework.decorators import api_view, permission_classes, detail_route
 from rest_framework.response import Response
@@ -13,6 +12,10 @@ from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.authtoken.models import Token
 from rest_framework.renderers import JSONRenderer
+from .permissions import IsOwnerOrReadOnly
+from .models import Task
+from .serializers import TaskSerializer, UserSerializer, TokenSerializer, ErrorSerializer
+from .forms import UserForm
 
 
 class TaskViewSet(viewsets.ModelViewSet):
@@ -112,3 +115,11 @@ def api_root(request, format=None):
     return Response({
         'tasks': reverse('task-list', request=request, format=format)
     })
+
+
+class UserFormView(View):
+    form_class = UserForm
+    template_name = 'form_login.html'
+    
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name, {'form': form})

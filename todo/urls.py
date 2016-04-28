@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from tasks.views import UserFormView
 
 admin.site.site_header = 'My ToDo Admin'
 
@@ -23,4 +24,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api/v1/', include('api.urls')),
     url(r'^api/v2/', include('tasks.urls')),
+    # (?P<token>[\w-]+)
+    url(r'^form/user/', UserFormView.as_view())
 ]
