@@ -122,4 +122,4 @@ class UserFormView(View):
     template_name = 'form_user.html'
     
     def get(self, request, *args, **kwargs):
-        return render(request, self.template_name, {'form': form})
+        return render(request, self.template_name, { 'form': self.form_class })
