@@ -17,3 +17,7 @@ class Task(models.Model):
 
     def __unicode__(self):
         return unicode(self.title)
+
+class UserExtend(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user_fb_id = models.CharField(max_length=250)
