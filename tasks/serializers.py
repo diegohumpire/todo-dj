@@ -13,7 +13,7 @@ class TaskSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
-    tasks = TaskSerializer(many=True)
+    tasks = TaskSerializer(many=True, required=False)
     class Meta:
         model = User
         fields = ('id', 'username', 'tasks')

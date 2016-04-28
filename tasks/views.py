@@ -110,6 +110,5 @@ class TokenView(APIView):
 @permission_classes((permissions.AllowAny,))
 def api_root(request, format=None):
     return Response({
-        'users': reverse('user-list', request=request, format=format),
         'tasks': reverse('task-list', request=request, format=format)
     })
