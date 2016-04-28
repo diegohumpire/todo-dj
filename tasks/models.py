@@ -6,8 +6,8 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class Task(models.Model):
-    title = models.CharField(max_length=50)
-    description = models.TextField(max_length=150)
+    title = models.CharField(max_length=50, blank=True)
+    description = models.TextField(max_length=150, blank=True)
     state = models.BooleanField()
     publish_date = models.DateTimeField(auto_now_add=True, editable=False)
     user = models.ForeignKey(User, related_name='tasks')
