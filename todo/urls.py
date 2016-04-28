@@ -25,5 +25,5 @@ urlpatterns = [
     url(r'^api/v1/', include('api.urls')),
     url(r'^api/v2/', include('tasks.urls')),
     # (?P<token>[\w-]+)
-    url(r'^form/user/', UserFormView.as_view())
+    url(r'^form/user/', UserFormView.as_view(), name='form_user')
 ]

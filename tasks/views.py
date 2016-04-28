@@ -119,7 +119,7 @@ def api_root(request, format=None):
 
 class UserFormView(View):
     form_class = UserForm
-    template_name = 'form_login.html'
+    template_name = 'form_user.html'
     
     def get(self, request, *args, **kwargs):
         return render(request, self.template_name, {'form': form})
