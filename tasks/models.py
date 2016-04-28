@@ -20,4 +20,4 @@ class Task(models.Model):
 
 class UserExtend(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    user_fb_id = models.CharField(max_length=250)
+    user_fb_id = models.CharField(max_length=250, blank=True)
